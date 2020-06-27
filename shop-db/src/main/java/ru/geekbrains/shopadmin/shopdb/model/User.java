@@ -1,4 +1,4 @@
-package ru.geekbrains.shopdb.model;
+package ru.geekbrains.shopadmin.shopdb.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,18 +13,18 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-//    @NotBlank(message = "Fill the name field")
+    //    @NotBlank(message = "Fill the name field")
     private String name;
 
-//    @NotBlank(message = "Fill the password field")
+    //    @NotBlank(message = "Fill the password field")
     private String password;
 
 //    @Transient
 //    private String confirmPassword;
 
-//    @NotBlank(message = "Fill the email field")
+    //    @NotBlank(message = "Fill the email field")
 //    @Email(message = "Email must be valid (ex. mail@domain.com)")
     private String email;
 

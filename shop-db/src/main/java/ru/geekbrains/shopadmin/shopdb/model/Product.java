@@ -1,4 +1,4 @@
-package ru.geekbrains.shopdb.model;
+package ru.geekbrains.shopadmin.shopdb.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +13,9 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-//    @NotBlank(message = "Fill the title field")
+    //    @NotBlank(message = "Fill the title field")
     private String title;
 
     @Column
@@ -26,7 +26,7 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-//    @NotNull(message = "Fill the price field")
+    //    @NotNull(message = "Fill the price field")
 //    @Positive(message = "Price should be a positive")
     private BigDecimal price;
 }
