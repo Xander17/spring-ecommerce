@@ -10,6 +10,7 @@ import ru.geekbrains.shopdb.model.Product;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
+    @Mapping(target = "newPicture", ignore = true)
     @Mapping(target = "category.products", ignore = true)
     ProductDto toDto(Product product);
 

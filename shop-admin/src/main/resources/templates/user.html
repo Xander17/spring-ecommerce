@@ -14,41 +14,44 @@
         <div class="content p-4">
             <h2 class="mb-4" th:text="${user.id}!=null?'User edit':'User create'"></h2>
 
-            <div class="col-12 px-2">
-                <form th:action="@{/users}" method="post" th:object="${user}">
-                    <input type="hidden" id="id" th:field="*{id}">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter name">
-                        <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                               class="form-text text-danger"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Name</label>
-                        <input type="email" id="email" th:field="*{email}" class="form-control"
-                               placeholder="Enter email">
-                        <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                               class="form-text text-danger"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" th:field="*{password}" class="form-control"
-                               placeholder="Enter password">
-                        <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                               class="form-text text-danger"></small>
-                    </div>
-                    <div class="form-group form-check mb-1">
-                        <input type="checkbox" class="form-check-input" id="enabled" th:field="*{enabled}">
-                        <label class="form-check-label" for="enabled">Enabled</label>
-                    </div>
-                    <div class="form-group">
-                        <label for="roles">Roles</label>
-                        <select multiple class="form-control" id="roles" th:field="*{roles}">
-                            <option th:each="role:${allRoles}" th:text="${role.name}" th:value="${role}"></option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary" th:text="${user.id!=null?'Save':'Add'}"></button>
-                </form>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form th:action="@{/users}" method="post" th:object="${user}">
+                        <input type="hidden" id="id" th:field="*{id}">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" th:field="*{name}" class="form-control"
+                                   placeholder="Enter name">
+                            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                   class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Name</label>
+                            <input type="email" id="email" th:field="*{email}" class="form-control"
+                                   placeholder="Enter email">
+                            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                   class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" th:field="*{password}" class="form-control"
+                                   placeholder="Enter password">
+                            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                   class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group form-check mb-1">
+                            <input type="checkbox" class="form-check-input" id="enabled" th:field="*{enabled}">
+                            <label class="form-check-label" for="enabled">Enabled</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="roles">Roles</label>
+                            <select multiple class="form-control" id="roles" th:field="*{roles}">
+                                <option th:each="role:${allRoles}" th:text="${role.name}" th:value="${role}"></option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2" th:text="${user.id!=null?'Save':'Add'}"></button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -15,6 +15,7 @@ import ru.geekbrains.adminui.services.ProductService;
 import ru.geekbrains.adminui.services.filters.ProductFilter;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -51,7 +52,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public String saveProduct(@Valid ProductDto product, BindingResult bindingResult) {
+    public String saveProduct(@Valid ProductDto product, BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors()) return "product";
         productService.save(product);
         return "redirect:/products";

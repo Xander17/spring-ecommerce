@@ -2,8 +2,10 @@ package ru.geekbrains.adminui.dto;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
+import ru.geekbrains.shopdb.model.Picture;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class ProductDto {
@@ -23,4 +25,6 @@ public class ProductDto {
     private BigDecimal price;
 
     private MultipartFile[] newPicture;
+
+    private List<PictureDto> pictures;
 }
