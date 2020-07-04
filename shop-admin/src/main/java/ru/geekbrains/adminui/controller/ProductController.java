@@ -9,10 +9,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.adminui.controller.utils.PageNumbers;
 import ru.geekbrains.adminui.controller.utils.UrlParamsFilter;
+import ru.geekbrains.adminui.dto.ProductDto;
 import ru.geekbrains.adminui.services.CategoryService;
 import ru.geekbrains.adminui.services.ProductService;
 import ru.geekbrains.adminui.services.filters.ProductFilter;
-import ru.geekbrains.shopdb.model.Product;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -35,7 +35,7 @@ public class ProductController {
             @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "pageSize", defaultValue = DEFAULT_LINES_ON_PAGE) Integer pageSize) {
         ProductFilter filter = productFilter.orElse(new ProductFilter());
-        Page<Product> products = productService.findAll(filter, PageRequest.of(page, pageSize));
+        Page<ProductDto> products = productService.findAll(filter, PageRequest.of(page, pageSize));
         model.addAttribute("products", products);
         model.addAttribute("productFilter", filter);
         model.addAttribute("filterUrl", "products?" + UrlParamsFilter.get(filter));
@@ -45,13 +45,13 @@ public class ProductController {
 
     @GetMapping("add")
     public String addProduct(Model model) {
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", new ProductDto());
         model.addAttribute("allCategories", categoryService.findAll());
         return "product";
     }
 
     @PostMapping
-    public String saveProduct(@Valid Product product, BindingResult bindingResult) {
+    public String saveProduct(@Valid ProductDto product, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "product";
         productService.save(product);
         return "redirect:/products";
@@ -59,7 +59,7 @@ public class ProductController {
 
     @GetMapping("edit/{id}")
     public String editProduct(Model model, @PathVariable("id") int id) {
-        Product product = productService.findById(id).orElse(null);
+        ProductDto product = productService.findById(id).orElse(null);
         if (product == null) return "redirect:/products";
         model.addAttribute("product", product);
         model.addAttribute("allCategories", categoryService.findAll());

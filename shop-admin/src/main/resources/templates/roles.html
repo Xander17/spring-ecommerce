@@ -43,7 +43,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!--/*@thymesVar id="role" type="ru.geekbrains.shopdb.model.Role"*/-->
+                                <!--/*@thymesVar id="role" type="ru.geekbrains.adminui.dto.RoleDto"*/-->
                                 <tr th:each="role,iter:${roles}" class="d-flex">
                                     <th scope="row" th:text="${iter.count}"
                                         class="col-1 text-center"></th>

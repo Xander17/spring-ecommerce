@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.geekbrains.adminui.dto.UserDto;
+import ru.geekbrains.adminui.mapper.UserMapper;
 import ru.geekbrains.shopdb.model.User;
 import ru.geekbrains.shopdb.repo.UserRepository;
 
@@ -23,20 +25,21 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository repository;
     private final BCryptPasswordEncoder encoder;
+    private final UserMapper userMapper;
 
     @Transactional(readOnly = true)
-    public Page<User> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<UserDto> findAll(Pageable pageable) {
+        return repository.findAll(pageable).map(userMapper::toDto);
     }
 
     @Transactional
-    public void save(User user) {
+    public void save(UserDto user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        repository.save(user);
+        repository.save(userMapper.toEntity(user));
     }
 
-    public Optional<User> findById(int id) {
-        return repository.findById(id);
+    public Optional<UserDto> findById(int id) {
+        return repository.findById(id).map(userMapper::toDto);
     }
 
     public void delete(int id) {

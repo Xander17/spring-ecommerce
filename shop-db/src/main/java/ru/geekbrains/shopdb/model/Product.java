@@ -15,18 +15,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //    @NotBlank(message = "Fill the title field")
     private String title;
 
-    @Column
-//    @NotBlank(message = "Fill the description field")
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    //    @NotNull(message = "Fill the price field")
-//    @Positive(message = "Price should be a positive")
     private BigDecimal price;
 }

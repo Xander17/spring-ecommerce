@@ -42,7 +42,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!--/*@thymesVar id="category" type="ru.geekbrains.shopdb.model.Category"*/-->
+                                <!--/*@thymesVar id="category" type="ru.geekbrains.adminui.dto.CategoryDto"*/-->
                                 <tr th:each="category,iter:${categories}" class="d-flex">
                                     <th scope="row" th:text="${iter.count}"
                                         class="col-1 text-center"></th>

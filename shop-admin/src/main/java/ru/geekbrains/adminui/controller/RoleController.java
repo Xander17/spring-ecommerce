@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.adminui.dto.RoleDto;
 import ru.geekbrains.adminui.services.RoleService;
-import ru.geekbrains.shopdb.model.Role;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class RoleController {
 
     @GetMapping
     public String rolesList(Model model, @RequestParam(name = "editId", required = false) String editId) {
-        List<Role> roles = roleService.findAll();
+        List<RoleDto> roles = roleService.findAll();
         model.addAttribute("roles", roles);
         model.addAttribute("editRoleId", editId);
         return "roles";
@@ -29,7 +29,7 @@ public class RoleController {
         if (newRole != null && !newRole.trim().isEmpty()) {
             newRole = newRole.toUpperCase();
             if (!newRole.startsWith("ROLE_")) newRole = "ROLE_" + newRole;
-            Role role = new Role();
+            RoleDto role = new RoleDto();
             role.setName(newRole);
             roleService.save(role);
         }
@@ -43,7 +43,7 @@ public class RoleController {
                 int idInt = Integer.parseInt(id);
                 newName = newName.toUpperCase();
                 if (!newName.startsWith("ROLE_")) newName = "ROLE_" + newName;
-                Role role = roleService.findById(idInt).get();
+                RoleDto role = roleService.findById(idInt).get();
                 role.setName(newName);
                 roleService.save(role);
             } catch (NumberFormatException ignored) {

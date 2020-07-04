@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.adminui.dto.CategoryDto;
 import ru.geekbrains.adminui.services.CategoryService;
-import ru.geekbrains.shopdb.model.Category;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class CategoryController {
 
     @GetMapping
     public String rolesList(Model model, @RequestParam(name = "editId", required = false) String editId) {
-        List<Category> categories = categoryService.findAll();
+        List<CategoryDto> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
         model.addAttribute("editCategoryId", editId);
         return "categories";
@@ -27,7 +27,7 @@ public class CategoryController {
     @PostMapping
     public String add(@RequestParam String newCategory) {
         if (newCategory != null && !newCategory.trim().isEmpty()) {
-            Category category = new Category();
+            CategoryDto category = new CategoryDto();
             category.setName(newCategory);
             categoryService.save(category);
         }
@@ -39,7 +39,7 @@ public class CategoryController {
         if (newName != null && id != null && !newName.trim().isEmpty()) {
             try {
                 int idInt = Integer.parseInt(id);
-                Category category = categoryService.findById(idInt).get();
+                CategoryDto category = categoryService.findById(idInt).get();
                 category.setName(newName);
                 categoryService.save(category);
             } catch (NumberFormatException ignored) {
