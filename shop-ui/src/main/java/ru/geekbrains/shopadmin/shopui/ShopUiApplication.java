@@ -1,4 +1,4 @@
-package ru.geekbrains.shopui;
+package ru.geekbrains.shopadmin.shopui;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

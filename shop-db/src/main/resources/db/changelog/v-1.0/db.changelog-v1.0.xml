@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="v1.0-01" author="xander">
+        <sqlFile path="01_table_create_user_and_role.sql"
+                 relativeToChangelogFile="true"
+                 dbms="mysql"
+                 stripComments="true"/>
+        <rollback>
+            <sqlFile path="01_rollback.sql"
+                     relativeToChangelogFile="true"
+                     dbms="mysql"
+                     stripComments="true"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="v1.0-02" author="xander">
+        <sqlFile path="02_insert_default_user_and_role.sql"
+                 relativeToChangelogFile="true"
+                 dbms="mysql"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet id="v1.0-03" author="xander">
+        <sqlFile path="03_table_create_product_and_category.sql"
+                 relativeToChangelogFile="true"
+                 dbms="mysql"
+                 stripComments="true"/>
+        <rollback>
+            <sqlFile path="03_rollback.sql"
+                     relativeToChangelogFile="true"
+                     dbms="mysql"
+                     stripComments="true"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
