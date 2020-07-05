@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="footer">
+
+    <!-- Newsletter -->
+    <div th:replace="fragment/footer/newsletter" class="newsletter"></div>
+
+    <!-- Footer -->
+    <footer th:replace="fragment/footer/main-footer" class="footer"></footer>
+
+    <!-- Copyright -->
+    <div th:replace="fragment/footer/copyright" class="copyright"></div>
+
+</th:block>

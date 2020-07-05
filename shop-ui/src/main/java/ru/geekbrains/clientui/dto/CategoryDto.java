@@ -1,18 +1,17 @@
-package ru.geekbrains.adminui.dto;
+package ru.geekbrains.clientui.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.shopdb.model.Product;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PictureDto {
+public class CategoryDto {
 
     private Integer id;
 
     private String name;
-
-    private String contentType;
 }

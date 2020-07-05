@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="menu" class="page_menu">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <div class="page_menu_content">
+
+                    <div class="page_menu_search">
+                        <form th:action="@{/#}">
+                            <input type="search" required="required" class="page_menu_search_input"
+                                   placeholder="Search for products...">
+                        </form>
+                    </div>
+                    <ul class="page_menu_nav">
+                        <li class="page_menu_item has-children">
+                            <a th:href="@{/#}">Language<i class="fa fa-angle-down"></i></a>
+                            <ul class="page_menu_selection">
+                                <li><a th:href="@{/#}">English<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Italian<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Spanish<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Japanese<i class="fa fa-angle-down"></i></a></li>
+                            </ul>
+                        </li>
+                        <li class="page_menu_item has-children">
+                            <a th:href="@{/#}">Currency<i class="fa fa-angle-down"></i></a>
+                            <ul class="page_menu_selection">
+                                <li><a th:href="@{/#}">US Dollar<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">EUR Euro<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">GBP British Pound<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">JPY Japanese Yen<i class="fa fa-angle-down"></i></a></li>
+                            </ul>
+                        </li>
+                        <li class="page_menu_item">
+                            <a th:href="@{/#}">Home<i class="fa fa-angle-down"></i></a>
+                        </li>
+                        <li class="page_menu_item has-children">
+                            <a th:href="@{/#}">Super Deals<i class="fa fa-angle-down"></i></a>
+                            <ul class="page_menu_selection">
+                                <li><a th:href="@{/#}">Super Deals<i class="fa fa-angle-down"></i></a></li>
+                                <li class="page_menu_item has-children">
+                                    <a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a>
+                                    <ul class="page_menu_selection">
+                                        <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                            </ul>
+                        </li>
+                        <li class="page_menu_item has-children">
+                            <a th:href="@{/#}">Featured Brands<i class="fa fa-angle-down"></i></a>
+                            <ul class="page_menu_selection">
+                                <li><a th:href="@{/#}">Featured Brands<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                            </ul>
+                        </li>
+                        <li class="page_menu_item has-children">
+                            <a th:href="@{/#}">Trending Styles<i class="fa fa-angle-down"></i></a>
+                            <ul class="page_menu_selection">
+                                <li><a th:href="@{/#}">Trending Styles<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                <li><a th:href="@{/#}">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                            </ul>
+                        </li>
+                        <li class="page_menu_item"><a th:href="@{/blog.html}">blog<i class="fa fa-angle-down"></i></a>
+                        </li>
+                        <li class="page_menu_item"><a th:href="@{/contact.html}">contact<i
+                                class="fa fa-angle-down"></i></a></li>
+                    </ul>
+
+                    <div class="menu_contact">
+                        <div class="menu_contact_item">
+                            <div class="menu_contact_icon"><img th:src="@{/images/phone_white.png}" alt=""></div>
+                            +38 068 005 3570
+                        </div>
+                        <div class="menu_contact_item">
+                            <div class="menu_contact_icon"><img th:src="@{/images/mail_white.png}" alt=""></div>
+                            <a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
