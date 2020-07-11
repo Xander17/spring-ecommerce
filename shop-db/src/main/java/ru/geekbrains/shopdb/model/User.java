@@ -15,17 +15,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //    @NotBlank(message = "Fill the name field")
     private String name;
 
-    //    @NotBlank(message = "Fill the password field")
     private String password;
 
-//    @Transient
-//    private String confirmPassword;
-
-    //    @NotBlank(message = "Fill the email field")
-//    @Email(message = "Email must be valid (ex. mail@domain.com)")
     private String email;
 
     private boolean enabled;

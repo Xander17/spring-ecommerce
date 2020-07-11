@@ -24,9 +24,4 @@ public class Role {
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
-
-    @Override
-    public String toString() {
-        return id + "#" + name;
-    }
 }

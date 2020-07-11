@@ -19,11 +19,6 @@ public class Category {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> products;
-
-    @Override
-    public String toString() {
-        return id + "#" + name;
-    }
 }
