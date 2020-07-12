@@ -58,11 +58,15 @@
                         <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                             <div class="cart_icon">
                                 <img th:src="@{/images/cart.png}" alt="">
-                                <div class="cart_count"><span>10</span></div>
+                                <div class="cart_count">
+                                    <!--/*@thymesVar id="cartSize" type="java.lang.Integer"*/-->
+                                    <span th:text="${cartSize}"></span>
+                                </div>
                             </div>
                             <div class="cart_content">
                                 <div class="cart_text"><a th:href="@{/cart}">Cart</a></div>
-                                <div class="cart_price">$85</div>
+                                <!--/*@thymesVar id="cartSum" type="java.math.BigDecimal"*/-->
+                                <div class="cart_price" th:text="'$'+${cartSum}"></div>
                             </div>
                         </div>
                     </div>

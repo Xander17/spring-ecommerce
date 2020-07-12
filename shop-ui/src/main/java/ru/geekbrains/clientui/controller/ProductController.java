@@ -17,11 +17,13 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final CommonController commonController;
 
     @GetMapping
     public String allProducts(Model model) {
         List<ProductDto> products = productService.findAll();
 
+        commonController.addRequiredModelAttributes(model);
         model.addAttribute("products", products);
         return "shop";
     }
@@ -30,6 +32,7 @@ public class ProductController {
     public String product(Model model, @PathVariable("id") Integer id) {
         ProductDto product = productService.findById(id).orElse(null);
         if (product == null) return "redirect:/shop";
+        commonController.addRequiredModelAttributes(model);
         model.addAttribute("product", product);
         return "product";
     }

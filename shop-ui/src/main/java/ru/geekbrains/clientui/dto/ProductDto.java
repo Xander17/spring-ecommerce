@@ -1,13 +1,15 @@
 package ru.geekbrains.clientui.dto;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class ProductDto {
+public class ProductDto implements Serializable {
+
+    private static final long serialVersionUID = 2523876094627699855L;
 
     private Integer id;
 
