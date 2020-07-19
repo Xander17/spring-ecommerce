@@ -28,3 +28,8 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.xml
+
+  redis:
+    host: localhost
+    password:
+    port: 6379
