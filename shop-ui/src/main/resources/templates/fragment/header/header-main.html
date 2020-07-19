@@ -26,11 +26,10 @@
                                         <i class="fas fa-chevron-down"></i>
                                         <ul class="custom_list clc">
                                             <li><a class="clc" th:href="@{/#}">All Categories</a></li>
-                                            <li><a class="clc" th:href="@{/#}">Computers</a></li>
-                                            <li><a class="clc" th:href="@{/#}">Laptops</a></li>
-                                            <li><a class="clc" th:href="@{/#}">Cameras</a></li>
-                                            <li><a class="clc" th:href="@{/#}">Hardware</a></li>
-                                            <li><a class="clc" th:href="@{/#}">Smartphones</a></li>
+                                            <!--/*@thymesVar id="categories" type="java.util.List<ru.geekbrains.clientui.dto.CategoryDto>"*/-->
+                                            <li th:each="category:${categories}">
+                                                <a class="clc" th:href="@{/#}" th:text="${category.name}"></a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
