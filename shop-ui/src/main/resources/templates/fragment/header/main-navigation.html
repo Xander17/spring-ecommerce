@@ -52,20 +52,13 @@
                             <li class="hassubs">
                                 <a th:href="@{/#}">Featured Brands<i class="fas fa-chevron-down"></i></a>
                                 <ul>
-                                    <li>
-                                        <a th:href="@{/#}">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a th:href="@{/#}">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            <li><a th:href="@{/#}">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            <li><a th:href="@{/#}">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                        </ul>
+                                    <!--/*@thymesVar id="brands" type="java.util.List<ru.geekbrains.clientui.dto.BrandDto>"*/-->
+                                    <li th:each="brand:${brands}">
+                                        <a th:href="@{/#}">
+                                            <span th:text="${brand.name}"></span>
+                                            <i class="fas fa-chevron-down"></i>
+                                        </a>
                                     </li>
-                                    <li><a th:href="@{/#}">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a th:href="@{/#}">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a th:href="@{/#}">Menu Item<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
                             </li>
                             <li><a th:href="@{/blog}">Blog<i class="fas fa-chevron-down"></i></a></li>

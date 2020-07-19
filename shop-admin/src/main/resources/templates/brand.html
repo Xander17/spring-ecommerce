@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/main::head(~{::title})">
+    <title th:text="${brand.id}!=null?'BootAdmin - Brand edit':'BootAdmin - Brand create'"></title>
+</head>
+<body class="bg-light">
+
+    <nav th:replace="fragment/nav::topbar"></nav>
+
+    <div class="d-flex">
+
+        <div th:replace="fragment/nav::menubar"></div>
+
+        <div class="content p-4">
+            <h2 class="mb-4" th:text="${brand.id}!=null?'Brand edit':'Brand create'"></h2>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form th:action="@{/brands}" method="post" th:object="${brand}" enctype="multipart/form-data">
+                        <input type="hidden" id="id" th:field="*{id}">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" th:field="*{name}" class="form-control"
+                                   placeholder="Enter name" required>
+                            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                   class="form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <label for="newPicture">Brand picture</label>
+                                <input type="file" class="form-control" id="newPicture"
+                                       th:field="*{newPicture}">
+                            </div>
+                        </div>
+                        <input type="hidden" th:if="${brand.picture}!=null" name="pictureId" th:value="${brand.picture.id}">
+                        <img th:if="${brand.picture}!=null"
+                             th:src="@{/picture/brand/{id}(id=${brand.picture.id})}"/><br>
+                        <button type="submit" class="btn btn-primary mt-2"
+                                th:text="${brand.id!=null?'Save':'Add'}"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="fragment/main::scripts"/>
+
+</body>
+</html>

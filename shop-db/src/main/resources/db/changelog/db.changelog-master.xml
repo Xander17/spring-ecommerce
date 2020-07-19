@@ -21,4 +21,10 @@
 
     <include file="v-1.1/db.changelog-v1.1.xml" relativeToChangelogFile="true"/>
 
+    <changeSet id="2" author="xander">
+        <tagDatabase tag="add_brand"/>
+    </changeSet>
+
+    <include file="v-1.2/db.changelog-v1.2.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
