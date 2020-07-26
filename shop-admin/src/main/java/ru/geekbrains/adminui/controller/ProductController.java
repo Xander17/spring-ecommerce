@@ -1,6 +1,7 @@
 package ru.geekbrains.adminui.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ import java.util.Optional;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
+
+    @Value("${app.zuul-server}")
+    private String proxyServer;
 
     private final String DEFAULT_LINES_ON_PAGE = "5";
     private final int MAX_NEIGHBOR_PAGE_NUMBERS = 4;
@@ -48,6 +52,7 @@ public class ProductController {
     public String addProduct(Model model) {
         model.addAttribute("product", new ProductDto());
         model.addAttribute("allCategories", categoryService.findAll());
+        model.addAttribute("proxyServer", proxyServer);
         return "product";
     }
 
@@ -64,6 +69,7 @@ public class ProductController {
         if (product == null) return "redirect:/products";
         model.addAttribute("product", product);
         model.addAttribute("allCategories", categoryService.findAll());
+        model.addAttribute("proxyServer", proxyServer);
         return "product";
     }
 

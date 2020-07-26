@@ -64,7 +64,7 @@
                     <div class="card-columns" style="column-count: 5">
                         <div class="card productPicture" th:each="picture:${product.pictures}">
                             <div class="card-header" th:text="${picture.name}"></div>
-                            <img class="card-img-bottom" th:src="@{/picture/{id}(id=${picture.id})}"
+                            <img class="card-img-bottom" th:src="@{{server}/picture/{id}(server=${proxyServer},id=${picture.id})}"
                                  width="40%" th:alt="${picture.name}"/>
                             <form th:action="@{/picture/delete/{id}(id=${picture.id})}"
                                   th:method="delete" class="pictureDeleteBtn">

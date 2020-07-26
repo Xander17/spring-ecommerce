@@ -27,7 +27,7 @@
                                     <li th:each="item:${orderItems}" class="cart_item clearfix">
                                         <div class="cart_item_image">
                                             <img th:unless="${#lists.isEmpty(item.product.pictures)}"
-                                                 th:src="@{/picture/{id}(id=${item.product.pictures.get(0).id})}"
+                                                 th:src="@{{server}/picture/{id}(server=${proxyServer},id=${item.product.pictures.get(0).id})}"
                                                  alt="">
                                             <img th:if="${#lists.isEmpty(item.product.pictures)}"
                                                  th:src="@{/images/no_picture.jpg}" alt="">

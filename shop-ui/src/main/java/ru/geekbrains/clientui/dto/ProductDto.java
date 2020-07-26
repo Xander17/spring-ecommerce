@@ -22,4 +22,6 @@ public class ProductDto implements Serializable {
     private BigDecimal price;
 
     private List<PictureDto> pictures;
+
+    private Integer stock;
 }
