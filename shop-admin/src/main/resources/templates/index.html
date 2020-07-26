@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragment/main::head(~{::title})">
     <title>BootAdmin - Main page</title>
 </head>
@@ -16,10 +17,11 @@
 
             <div class="card mb-4">
                 <div class="card-body">
-                    <a th:href="@{/products}" class="h5 text-primary">Products</a><br>
-                    <a th:href="@{/categories}" class="h5 text-primary">Categories</a><br>
-                    <a th:href="@{/users}" class="h5 text-primary">Users</a><br>
-                    <a th:href="@{/roles}" class="h5 text-primary">Roles</a>
+                    <a sec:authorize="hasRole('MANAGER')" th:href="@{/products}" class="h5 text-primary">Products</a><br>
+                    <a sec:authorize="hasRole('MANAGER')" th:href="@{/categories}" class="h5 text-primary">Categories</a><br>
+                    <a sec:authorize="hasRole('MANAGER')" th:href="@{/brands}" class="h5 text-primary">Brands</a><br>
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/users}" class="h5 text-primary">Users</a><br>
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/roles}" class="h5 text-primary">Roles</a>
                 </div>
             </div>
         </div>

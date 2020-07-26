@@ -28,6 +28,7 @@ $(document).ready(function () {
 
     initCustomDropdown();
     initPageMenu();
+    initAjax();
 
     $(window).on('resize', function () {
         setHeader();
@@ -173,4 +174,24 @@ $(document).ready(function () {
         menuActive = false;
     }
 
+    // Ajax
+
+    function initAjax() {
+        $(document).on('submit', '.cart_form', function (event) {
+            event.preventDefault();
+            let submittedForm = $(event.target);
+            let cartInfoSelector = '#top_cart_info';
+            let cartContainerSelector = '#cart_container';
+
+            $.ajax({
+                url: submittedForm.attr("action"),
+                type: submittedForm.attr("method"),
+                data: submittedForm.serialize(),
+                success: function (response) {
+                    $(cartInfoSelector).html($(response).find(cartInfoSelector).html());
+                    $(cartContainerSelector).html($(response).find(cartContainerSelector).html());
+                }
+            });
+        })
+    }
 });

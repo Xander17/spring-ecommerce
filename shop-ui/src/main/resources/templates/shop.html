@@ -38,15 +38,10 @@
                             <div class="sidebar_section">
                                 <div class="sidebar_title">Categories</div>
                                 <ul class="sidebar_categories">
-                                    <li><a th:href="@{/#}">Computers & Laptops</a></li>
-                                    <li><a th:href="@{/#}">Cameras & Photos</a></li>
-                                    <li><a th:href="@{/#}">Hardware</a></li>
-                                    <li><a th:href="@{/#}">Smartphones & Tablets</a></li>
-                                    <li><a th:href="@{/#}">TV & Audio</a></li>
-                                    <li><a th:href="@{/#}">Gadgets</a></li>
-                                    <li><a th:href="@{/#}">Car Electronics</a></li>
-                                    <li><a th:href="@{/#}">Video Games & Consoles</a></li>
-                                    <li><a th:href="@{/#}">Accessories</a></li>
+                                    <!--/*@thymesVar id="categories" type="java.util.List<ru.geekbrains.clientui.dto.CategoryDto>"*/-->
+                                    <li th:each="category:${categories}">
+                                        <a th:href="@{/#}" th:text="${category.name}"></a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="sidebar_section filter_by_section">
@@ -75,14 +70,10 @@
                             <div class="sidebar_section">
                                 <div class="sidebar_subtitle brands_subtitle">Brands</div>
                                 <ul class="brands_list">
-                                    <li class="brand"><a th:href="@{/#}">Apple</a></li>
-                                    <li class="brand"><a th:href="@{/#}">Beoplay</a></li>
-                                    <li class="brand"><a th:href="@{/#}">Google</a></li>
-                                    <li class="brand"><a th:href="@{/#}">Meizu</a></li>
-                                    <li class="brand"><a th:href="@{/#}">OnePlus</a></li>
-                                    <li class="brand"><a th:href="@{/#}">Samsung</a></li>
-                                    <li class="brand"><a th:href="@{/#}">Sony</a></li>
-                                    <li class="brand"><a th:href="@{/#}">Xiaomi</a></li>
+                                    <!--/*@thymesVar id="brands" type="java.util.List<ru.geekbrains.clientui.dto.BrandDto>"*/-->
+                                    <li th:each="brand:${brands}" class="brand">
+                                        <a th:href="@{/#}" th:text="${brand.name}"></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
