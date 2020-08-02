@@ -31,3 +31,6 @@ spring:
 
 app:
   zuul-server: http://localhost:8091
+  import:
+    files-check-rate: 2000
+    csv-product-dir: product-import

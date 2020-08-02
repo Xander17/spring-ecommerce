@@ -4,6 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.geekbrains.adminui.dto.CategoryDto;
 import ru.geekbrains.adminui.dto.ProductDto;
+import ru.geekbrains.adminui.dto.csv.ProductCsv;
 import ru.geekbrains.shopdb.model.Category;
 import ru.geekbrains.shopdb.model.Product;
 
@@ -16,4 +17,6 @@ public interface ProductMapper {
 
     @Mapping(target = "category.products", ignore = true)
     Product toEntity(ProductDto productDto);
+
+    Product fromCsvToEntity(ProductCsv productCsv);
 }
