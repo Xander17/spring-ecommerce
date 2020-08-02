@@ -1,8 +1,8 @@
 package ru.geekbrains.adminui.messaging;
 
-import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -13,18 +13,9 @@ public class CsvProductMapper {
 
     @SneakyThrows
     public static <T> List<T> parse(File file, Class<T> parseClass) {
-        CsvToBean<T> csv = new CsvToBean<>();
-        CSVReader csvReader = new CSVReader(Files.newBufferedReader(file.toPath()));
-        csv.setCsvReader(csvReader);
-        csv.setMappingStrategy(columnMapping(parseClass));
+        CsvToBean<T> csv = new CsvToBeanBuilder<T>(Files.newBufferedReader(file.toPath()))
+                .withType(parseClass)
+                .build();
         return csv.parse();
-    }
-
-    private static <T> ColumnPositionMappingStrategy<T> columnMapping(Class<T> parseClass) {
-        ColumnPositionMappingStrategy<T> strategy = new ColumnPositionMappingStrategy<>();
-        strategy.setType(parseClass);
-        String[] columns = new String[]{"title", "description", "price"};
-        strategy.setColumnMapping(columns);
-        return strategy;
     }
 }
