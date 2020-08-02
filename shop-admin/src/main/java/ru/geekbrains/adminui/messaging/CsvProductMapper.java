@@ -3,7 +3,6 @@ package ru.geekbrains.adminui.messaging;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import lombok.SneakyThrows;
 
 import java.io.File;
@@ -21,11 +20,11 @@ public class CsvProductMapper {
         return csv.parse();
     }
 
-    private static <T> HeaderColumnNameMappingStrategy<T> columnMapping(Class<T> parseClass) {
-        HeaderColumnNameMappingStrategy<T> strategy = new HeaderColumnNameMappingStrategy<>();
+    private static <T> ColumnPositionMappingStrategy<T> columnMapping(Class<T> parseClass) {
+        ColumnPositionMappingStrategy<T> strategy = new ColumnPositionMappingStrategy<>();
         strategy.setType(parseClass);
-//        String[] columns = new String[]{"title", "description", "price"};
-//        strategy.setColumnMapping(columns);
+        String[] columns = new String[]{"title", "description", "price"};
+        strategy.setColumnMapping(columns);
         return strategy;
     }
 }

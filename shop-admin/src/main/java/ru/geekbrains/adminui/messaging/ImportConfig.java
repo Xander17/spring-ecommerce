@@ -81,11 +81,9 @@ public class ImportConfig {
             }
             source.delete();
 
-            List<Product> collect = products.stream()
+            return products.stream()
                     .map(productMapper::fromCsvToEntity)
                     .collect(Collectors.toList());
-
-            return collect;
         };
     }
 }

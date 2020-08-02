@@ -18,5 +18,6 @@ public interface ProductMapper {
     @Mapping(target = "category.products", ignore = true)
     Product toEntity(ProductDto productDto);
 
+    @Mapping(source = "category",target = "category.id")
     Product fromCsvToEntity(ProductCsv productCsv);
 }
