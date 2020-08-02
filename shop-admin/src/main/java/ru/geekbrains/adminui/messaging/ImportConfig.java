@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.util.Pair;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.dsl.ConsumerEndpointSpec;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -18,6 +19,7 @@ import org.springframework.integration.jpa.support.PersistMode;
 import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.MessageHandler;
 import ru.geekbrains.adminui.dto.csv.ProductCsv;
+import ru.geekbrains.adminui.enums.CsvImportType;
 import ru.geekbrains.adminui.mapper.ProductMapper;
 import ru.geekbrains.shopdb.model.Product;
 
@@ -70,20 +72,30 @@ public class ImportConfig {
                 .persistMode(PersistMode.PERSIST);
     }
 
-    private GenericTransformer<File, List<Product>> transformer() {
-        return source -> {
-            List<ProductCsv> products;
-            try {
-                log.info("Start read file '{}'", source.getName());
-                products = CsvProductMapper.parse(source, ProductCsv.class);
-            } catch (Exception e) {
-                products = Collections.emptyList();
-            }
-            source.delete();
+//    private GenericTransformer<File, Pair<File, CsvImportType>> typeResolver() {
+//        return source -> {
+//            String prefix = source.getName().split("_")[0];
+//            return Pair.of(source, CsvImportType.getTypeByPrefix(prefix));
+//        };
+//    }
 
-            return products.stream()
-                    .map(productMapper::fromCsvToEntity)
-                    .collect(Collectors.toList());
+    private GenericTransformer<File, List<Product>> transformer() {
+        return new GenericTransformer<File, List<Product>>() {
+            @Override
+            public List<Product> transform(File source) {
+                List<ProductCsv> products;
+                try {
+                    log.info("Start read file '{}'", source.getName());
+                    products = CsvProductMapper.parse(source, ProductCsv.class);
+                } catch (Exception e) {
+                    products = Collections.emptyList();
+                }
+                source.delete();
+
+                return products.stream()
+                        .map(productMapper::fromCsvToEntity)
+                        .collect(Collectors.toList());
+            }
         };
     }
 }

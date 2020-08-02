@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.adminui.controller.utils.PageNumbers;
 import ru.geekbrains.adminui.controller.utils.UrlParamsFilter;
 import ru.geekbrains.adminui.dto.ProductDto;
 import ru.geekbrains.adminui.services.CategoryService;
+import ru.geekbrains.adminui.services.ImportCsvService;
 import ru.geekbrains.adminui.services.ProductService;
 import ru.geekbrains.adminui.services.filters.ProductFilter;
 
@@ -32,6 +34,7 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final ImportCsvService importCsvService;
 
     @GetMapping
     public String productList(
@@ -76,6 +79,12 @@ public class ProductController {
     @DeleteMapping("delete/{id}")
     public String deleteProduct(Model model, @PathVariable("id") int id) {
         productService.delete(id);
+        return "redirect:/products";
+    }
+
+    @PostMapping("import")
+    public String importCsv(MultipartFile csvFile) throws IOException {
+        importCsvService.uploadFileWithProduct(csvFile);
         return "redirect:/products";
     }
 }

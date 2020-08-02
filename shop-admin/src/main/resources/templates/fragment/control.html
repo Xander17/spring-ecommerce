@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="importForm(importPath)">
+    <form class="form-inline ml-2 d-inline-block" th:action="${importPath}" method="post"
+          enctype="multipart/form-data">
+        <div class="custom-file d-inline-block">
+            <label class="font-weight-bold d-inline-block" for="csvFile">Import CSV:</label>
+            <input type="file" class="form-control" id="csvFile" name="csvFile" required>
+            <button type="submit" class="btn btn-primary">Import</button>
+        </div>
+    </form>
+</th:block>
