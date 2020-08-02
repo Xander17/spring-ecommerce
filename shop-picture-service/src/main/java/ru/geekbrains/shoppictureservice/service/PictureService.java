@@ -1,4 +1,4 @@
-package ru.geekbrains.clientui.service;
+package ru.geekbrains.shoppictureservice.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

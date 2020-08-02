@@ -14,7 +14,8 @@
                         <!--/*@thymesVar id="brands" type="java.util.List<ru.geekbrains.clientui.dto.BrandDto>"*/-->
                         <div th:each="brand:${brands}" class="owl-item">
                             <div class="brands_item d-flex flex-column justify-content-center">
-                                <img th:src="@{/picture/brand/{id}(id=${brand.picture.id})}" alt="">
+                                <img th:src="@{{server}/picture/brand/{id}(server=${proxyServer},id=${brand.picture.id})}"
+                                     alt="">
                             </div>
                         </div>
 
