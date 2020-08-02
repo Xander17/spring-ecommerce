@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.util.Pair;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.dsl.ConsumerEndpointSpec;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -18,10 +17,9 @@ import org.springframework.integration.jpa.dsl.JpaUpdatingOutboundEndpointSpec;
 import org.springframework.integration.jpa.support.PersistMode;
 import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.MessageHandler;
-import ru.geekbrains.adminui.dto.csv.ProductCsv;
-import ru.geekbrains.adminui.enums.CsvImportType;
-import ru.geekbrains.adminui.mapper.ProductMapper;
-import ru.geekbrains.shopdb.model.Product;
+import ru.geekbrains.adminui.messaging.enums.CsvImportType;
+import ru.geekbrains.adminui.mapper.CsvImportMapper;
+import ru.geekbrains.adminui.mapper.MapperFactory;
 
 import javax.persistence.EntityManagerFactory;
 import java.io.File;
@@ -41,7 +39,7 @@ public class ImportConfig {
     @Value("${app.import.files-check-rate}")
     private int filesCheckRate;
 
-    private final ProductMapper productMapper;
+    private final MapperFactory mapperFactory;
 
     @Bean
     public IntegrationFlow integrationFlow(MessageSource<File> source, @Qualifier("insertHandler") MessageHandler handler) {
@@ -72,28 +70,35 @@ public class ImportConfig {
                 .persistMode(PersistMode.PERSIST);
     }
 
-//    private GenericTransformer<File, Pair<File, CsvImportType>> typeResolver() {
-//        return source -> {
-//            String prefix = source.getName().split("_")[0];
-//            return Pair.of(source, CsvImportType.getTypeByPrefix(prefix));
-//        };
-//    }
-
-    private GenericTransformer<File, List<Product>> transformer() {
-        return new GenericTransformer<File, List<Product>>() {
+    private GenericTransformer<File, List<?>> transformer() {
+        return new GenericTransformer<File, List<?>>() {
             @Override
-            public List<Product> transform(File source) {
-                List<ProductCsv> products;
+            public List<?> transform(File source) {
+                String prefix = source.getName().split("_")[0];
+                CsvImportType type = CsvImportType.getTypeByPrefix(prefix);
+                if (type == CsvImportType.NONE) {
+                    return Collections.emptyList();
+                }
+                return genericTransform(source, type);
+            }
+
+            private List<?> genericTransform(File sourse, CsvImportType type) {
+                return genericTransform(sourse, type, type.getDtoClass(), type.getEntityClass());
+            }
+
+            private <S, D> List<D> genericTransform(File source, CsvImportType type, Class<S> srcClass, Class<D> dstClass) {
+                List<S> srcList;
                 try {
                     log.info("Start read file '{}'", source.getName());
-                    products = CsvProductMapper.parse(source, ProductCsv.class);
+                    srcList = CsvProductMapper.parse(source, srcClass);
                 } catch (Exception e) {
-                    products = Collections.emptyList();
+                    srcList = Collections.emptyList();
                 }
                 source.delete();
 
-                return products.stream()
-                        .map(productMapper::fromCsvToEntity)
+                CsvImportMapper<S, D> mapper = mapperFactory.getMapper(type, srcClass, dstClass);
+                return srcList.stream()
+                        .map(mapper::fromCsvToEntity)
                         .collect(Collectors.toList());
             }
         };

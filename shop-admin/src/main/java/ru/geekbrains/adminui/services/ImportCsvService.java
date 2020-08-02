@@ -4,7 +4,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.geekbrains.adminui.enums.CsvImportType;
+import ru.geekbrains.adminui.messaging.enums.CsvImportType;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -27,11 +27,7 @@ public class ImportCsvService {
         Files.createDirectories(importDirectory);
     }
 
-    public void uploadFileWithProduct(MultipartFile file) throws IOException {
-        uploadFile(file, CsvImportType.PRODUCT);
-    }
-
-    private void uploadFile(MultipartFile file, CsvImportType type) throws IOException {
+    public void uploadFile(MultipartFile file, CsvImportType type) throws IOException {
         String fileName = file.getOriginalFilename();
         if (Strings.isBlank(fileName) || !fileName.endsWith(".csv")) return;
         file.transferTo(importDirectory.resolve(String.format("%s_%s.csv", type.getFilePrefix(), UUID.randomUUID().toString())));

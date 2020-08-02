@@ -1,4 +1,4 @@
-package ru.geekbrains.adminui.dto.csv;
+package ru.geekbrains.adminui.messaging.csv;
 
 import com.opencsv.bean.CsvBindByPosition;
 import lombok.AllArgsConstructor;

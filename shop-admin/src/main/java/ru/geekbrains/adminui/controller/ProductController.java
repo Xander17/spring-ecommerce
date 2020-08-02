@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.adminui.controller.utils.PageNumbers;
 import ru.geekbrains.adminui.controller.utils.UrlParamsFilter;
 import ru.geekbrains.adminui.dto.ProductDto;
+import ru.geekbrains.adminui.messaging.enums.CsvImportType;
 import ru.geekbrains.adminui.services.CategoryService;
 import ru.geekbrains.adminui.services.ImportCsvService;
 import ru.geekbrains.adminui.services.ProductService;
@@ -84,7 +85,7 @@ public class ProductController {
 
     @PostMapping("import")
     public String importCsv(MultipartFile csvFile) throws IOException {
-        importCsvService.uploadFileWithProduct(csvFile);
+        importCsvService.uploadFile(csvFile, CsvImportType.PRODUCT);
         return "redirect:/products";
     }
 }

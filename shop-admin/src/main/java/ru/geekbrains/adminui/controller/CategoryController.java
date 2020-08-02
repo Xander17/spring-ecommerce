@@ -4,9 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.adminui.dto.CategoryDto;
+import ru.geekbrains.adminui.messaging.enums.CsvImportType;
 import ru.geekbrains.adminui.services.CategoryService;
+import ru.geekbrains.adminui.services.ImportCsvService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -15,6 +19,7 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final ImportCsvService importCsvService;
 
     @GetMapping
     public String rolesList(Model model, @RequestParam(name = "editId", required = false) String editId) {
@@ -51,6 +56,12 @@ public class CategoryController {
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         categoryService.delete(id);
+        return "redirect:/categories";
+    }
+
+    @PostMapping("import")
+    public String importCsv(MultipartFile csvFile) throws IOException {
+        importCsvService.uploadFile(csvFile, CsvImportType.CATEGORY);
         return "redirect:/categories";
     }
 }
