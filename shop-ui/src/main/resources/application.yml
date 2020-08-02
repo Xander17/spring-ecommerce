@@ -33,3 +33,9 @@ spring:
     host: localhost
     password:
     port: 6379
+
+app:
+  zuul-server: http://localhost:8091
+  stock-service:
+    name: stock-service
+    count-path: /stock

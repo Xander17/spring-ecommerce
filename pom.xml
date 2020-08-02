@@ -19,6 +19,24 @@
         <module>shop-db</module>
         <module>shop-admin</module>
         <module>shop-ui</module>
+        <module>shop-picture-service</module>
+        <module>shop-stock-service</module>
     </modules>
+
+    <properties>
+        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

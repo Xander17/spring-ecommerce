@@ -1,6 +1,7 @@
 package ru.geekbrains.adminui.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -19,6 +20,9 @@ import java.util.List;
 @RequestMapping("/brands")
 public class BrandController {
 
+    @Value("${app.zuul-server}")
+    private String proxyServer;
+
     private final BrandService brandService;
 
     @GetMapping
@@ -31,6 +35,7 @@ public class BrandController {
     @GetMapping("add")
     public String addProduct(Model model) {
         model.addAttribute("brand", new BrandDto());
+        model.addAttribute("proxyServer", proxyServer);
         return "brand";
     }
 
@@ -39,6 +44,7 @@ public class BrandController {
         BrandDto brand = brandService.findById(id).orElse(null);
         if (brand == null) return "redirect:/brands";
         model.addAttribute("brand", brand);
+        model.addAttribute("proxyServer", proxyServer);
         return "brand";
     }
 

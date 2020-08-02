@@ -13,10 +13,6 @@ public class PictureService {
 
     private final PictureRepository repository;
 
-    public Optional<Picture> findById(int id) {
-        return repository.findById(id);
-    }
-
     public void delete(int id){
         repository.deleteById(id);
     }
