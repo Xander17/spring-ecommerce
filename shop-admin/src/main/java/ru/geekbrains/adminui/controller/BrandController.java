@@ -7,9 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.adminui.dto.BrandDto;
 import ru.geekbrains.adminui.dto.BrandPictureDto;
+import ru.geekbrains.adminui.messaging.enums.CsvImportType;
 import ru.geekbrains.adminui.services.BrandService;
+import ru.geekbrains.adminui.services.ImportCsvService;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -24,6 +27,7 @@ public class BrandController {
     private String proxyServer;
 
     private final BrandService brandService;
+    private final ImportCsvService importCsvService;
 
     @GetMapping
     public String rolesList(Model model) {
@@ -64,6 +68,12 @@ public class BrandController {
     @DeleteMapping("delete/{id}")
     public String deleteProduct(Model model, @PathVariable("id") int id) {
         brandService.delete(id);
+        return "redirect:/brands";
+    }
+
+    @PostMapping("import")
+    public String importCsv(MultipartFile csvFile) throws IOException {
+        importCsvService.uploadFile(csvFile, CsvImportType.BRAND);
         return "redirect:/brands";
     }
 }

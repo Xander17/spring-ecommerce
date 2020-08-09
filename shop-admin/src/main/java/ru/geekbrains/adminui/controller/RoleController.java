@@ -4,9 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.adminui.dto.RoleDto;
+import ru.geekbrains.adminui.messaging.enums.CsvImportType;
+import ru.geekbrains.adminui.services.ImportCsvService;
 import ru.geekbrains.adminui.services.RoleService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -15,6 +19,7 @@ import java.util.List;
 public class RoleController {
 
     private final RoleService roleService;
+    private final ImportCsvService importCsvService;
 
     @GetMapping
     public String rolesList(Model model, @RequestParam(name = "editId", required = false) String editId) {
@@ -55,6 +60,12 @@ public class RoleController {
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id) {
         roleService.delete(id);
+        return "redirect:/roles";
+    }
+
+    @PostMapping("import")
+    public String importCsv(MultipartFile csvFile) throws IOException {
+        importCsvService.uploadFile(csvFile, CsvImportType.ROLE);
         return "redirect:/roles";
     }
 }

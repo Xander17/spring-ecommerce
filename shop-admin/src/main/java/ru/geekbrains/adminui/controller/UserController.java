@@ -7,10 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.adminui.controller.utils.PageNumbers;
 import ru.geekbrains.adminui.dto.UserDto;
+import ru.geekbrains.adminui.messaging.enums.CsvImportType;
+import ru.geekbrains.adminui.services.ImportCsvService;
 import ru.geekbrains.adminui.services.RoleService;
 import ru.geekbrains.adminui.services.UserService;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/users")
@@ -22,6 +27,7 @@ public class UserController {
 
     private final UserService userService;
     private final RoleService roleService;
+    private final ImportCsvService importCsvService;
 
     @GetMapping
     public String userList(Model model,
@@ -61,6 +67,12 @@ public class UserController {
     @DeleteMapping("delete/{id}")
     public String deleteProduct(Model model, @PathVariable("id") int id) {
         userService.delete(id);
+        return "redirect:/users";
+    }
+
+    @PostMapping("import")
+    public String importCsv(MultipartFile csvFile) throws IOException {
+        importCsvService.uploadFile(csvFile, CsvImportType.USER);
         return "redirect:/users";
     }
 }

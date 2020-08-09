@@ -2,14 +2,14 @@ package ru.geekbrains.adminui.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 import ru.geekbrains.adminui.dto.CategoryDto;
 import ru.geekbrains.adminui.dto.ProductDto;
+import ru.geekbrains.adminui.messaging.csv.CategoryCsv;
 import ru.geekbrains.shopdb.model.Category;
 import ru.geekbrains.shopdb.model.Product;
 
 @Mapper(componentModel = "spring")
-public interface CategoryMapper {
+public interface CategoryMapper extends CsvImportMapper<CategoryCsv, Category> {
 
     @Mapping(target = "products", qualifiedByName = "toEntityProduct")
     Category toEntity(CategoryDto categoryDto);
@@ -22,4 +22,6 @@ public interface CategoryMapper {
 
     @Mapping(target = "category", ignore = true)
     Product toEntityProduct(ProductDto productDto);
+
+    Category fromCsvToEntity(CategoryCsv productCsv);
 }

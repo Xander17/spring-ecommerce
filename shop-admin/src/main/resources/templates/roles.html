@@ -19,13 +19,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12" sec:authorize="hasRole('SUPER_ADMIN')">
-                            <form th:action="@{/roles}" method="post" class="form-inline">
+                            <form th:action="@{/roles}" method="post" class="form-inline mb-2">
                                 <label for="newRole" class="font-weight-bold mr-1">Add role (without 'ROLE_'
                                     prefix):</label>
                                 <input type="text" id="newRole" name="newRole" class="form-control"
                                        placeholder="Enter name of role">
                                 <button class="btn btn-primary ml-1">Add</button>
                             </form>
+                            <th:block th:replace="/fragment/control::importForm(@{/roles/import})"/>
                         </div>
                         <div th:unless="${roles.isEmpty()}" class="col-12 align-items-center">
                             <div class="col-12 px-0">

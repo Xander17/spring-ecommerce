@@ -20,6 +20,7 @@
                     <div class="row">
                         <div class="col-12" sec:authorize="hasRole('MANAGER')">
                             <a class="btn btn-primary" th:href="@{/brands/add}">Add Brand</a>
+                            <th:block th:replace="/fragment/control::importForm(@{/brands/import})"/>
                         </div>
                         <div th:unless="${brands.isEmpty()}" class="col-12 align-items-center">
                             <div class="col-12 px-0">

@@ -19,7 +19,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12" sec:authorize="hasRole('MANAGER')">
-                            <a class="btn btn-primary" th:href="@{/products/add}">Add Product</a>
+                            <a class="btn btn-primary mr-2" th:href="@{/products/add}">Add Product</a>
+                            <th:block th:replace="/fragment/control::importForm(@{/products/import})"/>
                         </div>
                         <div th:if="${products.hasContent()}" class="col-12 align-items-center">
                             <div class="row col-12 my-3 mx-0 px-0 align-items-center">
