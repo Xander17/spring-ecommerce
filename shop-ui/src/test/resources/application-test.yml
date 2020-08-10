@@ -1,0 +1,47 @@
+server:
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+
+  main:
+    allow-bean-definition-overriding: true
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: update
+        properties:
+          hibernate.format_sql: true
+          hibernate:
+          dialect: org.hibernate.dialect.H2Dialect
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  liquibase:
+    enabled: false
+
+  redis:
+    host: localhost
+    password:
+    port: 6379
+
+eureka:
+  client:
+    healthcheck:
+      enabled: false
+
+app:
+  zuul-server: http://localhost:8091
+  stock-service:
+    name: stock-service
+    count-path: /stock
