@@ -19,7 +19,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12" sec:authorize="hasRole('MANAGER')">
-                            <a class="btn btn-primary mr-2" th:href="@{/products/add}">Add Product</a>
+                            <a class="btn btn-primary mr-2" th:href="@{/products/add}" id="btnAddProduct">
+                                Add Product
+                            </a>
                             <th:block th:replace="/fragment/control::importForm(@{/products/import})"/>
                         </div>
                         <div th:if="${products.hasContent()}" class="col-12 align-items-center">
@@ -93,7 +95,7 @@
                                                th:href="@{/products/edit/{id}(id=${product.id})}"><i
                                                     class="fas fa-edit"></i></a>
                                             <form th:action="@{/products/delete/{id}(id=${product.id})}"
-                                                  th:method="delete"
+                                                  th:method="delete" name="btnDelete"
                                                   class="d-inline-block">
                                                 <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                             </form>
@@ -128,7 +130,7 @@
                                    th:field="*{maxPrice}">
                         </div>
                         <input type="hidden" name="pageSize" th:value="${products.size}">
-                        <button type="submit" class="btn btn-primary my-2">Set filters</button>
+                        <button type="submit" class="btn btn-primary my-2" id="btnSetFilter">Set filters</button>
                         <a class="btn btn-primary my-2" th:href="@{/products(pageSize=${products.size})}">Reset
                             filters</a>
                     </form>
