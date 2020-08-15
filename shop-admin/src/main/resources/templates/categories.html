@@ -23,7 +23,7 @@
                                 <label for="newCategory" class="font-weight-bold mr-1">Add category:</label>
                                 <input type="text" id="newCategory" name="newCategory" class="form-control col-6"
                                        placeholder="Enter name of category">
-                                <button class="btn btn-primary ml-1">Add</button>
+                                <button class="btn btn-primary ml-1" id="btnAddCategory">Add</button>
                             </form>
                             <th:block th:replace="/fragment/control::importForm(@{/categories/import})"/>
                         </div>
@@ -75,7 +75,7 @@
                                             <form th:action="@{/categories/delete/{id}(id=${category.id})}"
                                                   th:method="delete"
                                                   class="d-inline-block">
-                                                <button class="btn btn-danger"
+                                                <button class="btn btn-danger" name="btnDelete"
                                                         th:disabled="${category.products.size()}>0?true:false"
                                                         th:classappend="${category.products.size()}>0?'disabled':''">
                                                     <i class="far fa-trash-alt"></i>

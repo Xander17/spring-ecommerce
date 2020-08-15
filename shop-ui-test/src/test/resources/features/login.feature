@@ -1,17 +1,18 @@
 Feature: Login
 
   Scenario Outline: Successful Login to the page and logout after
-    Given I open web browser
-    When I navigate to login page
-    And I provide username as "<username>" and password as "<password>"
-    And I click on login button
-    Then name should be "<name>"
+    Given Open web browser
+    When Go to login page
+    And Fill form with <username> and <password>
+    And Click on login button
+    Then Check name that should be <name>
     When Open dropdown menu
-    And click logout button
-    Then user logged out
+    And Click logout button
+    Then User logged out
+    Then Quit web browser
 
     Examples:
-      | username | password | name |
+      | username | password | name   |
       | sadmin   |          | sadmin |
 
 
